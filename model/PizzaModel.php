@@ -1,5 +1,5 @@
 <?php
-class Pizza extends Database
+class PizzaModel extends Database
 {
     private int $id = 0;
     private string $nom = "";
@@ -83,7 +83,7 @@ class Pizza extends Database
         $sql = "select * from pizza";
         $sth = $dbh->prepare($sql);
         $sth->execute();
-        $list = $sth->fetchAll(PDO::FETCH_CLASS, "Pizza");
+        $list = $sth->fetchAll(PDO::FETCH_CLASS, 'PizzaModel');
         return $list;
     }
 }

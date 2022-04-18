@@ -1,12 +1,12 @@
 <?php
-class PanierPage extends Database
+class PanierModel extends Database
 {
 
     private int $id = 0;
     private int $montant = 0;
     private string $moyen_de_paiement = "";
     private int $numero_de_commande = 0;
-    private int $date_de_transaction = 0;
+    private \DateTime $date_de_transaction;
 
 
 
@@ -23,7 +23,7 @@ class PanierPage extends Database
     {
         return $this->numero_de_commande;
     }
-    public function getdate_de_transaction(): int
+    public function getdate_de_transaction(): DateTime
     {
         return $this->date_de_transaction;
     }
@@ -37,7 +37,7 @@ class PanierPage extends Database
     {
         $this->moyen_de_paiement = $moyen_de_paiement;
     }
-    public function setdate_de_transaction(int $date_de_transaction)
+    public function setdate_de_transaction(DateTime $date_de_transaction)
     {
         $this->date_de_tansaction = $date_de_transaction;
     }
@@ -58,23 +58,23 @@ class PanierPage extends Database
         }
 
         $sth = $this->prepare($sql);
-        $sth->bindParam(":montant", $this->$montant);
-        $sth->bindParam(":moyen_de_paiement", $this->$moyen_de_paiement);
-        $sth->bindParam(":numero_de_commande", $this->$numero_de_commande);
-        $sth->bindParam(":date_de_paiement", $this->$date_de_paiement);
+        $sth->bindParam(":montant", $this->montant);
+        $sth->bindParam(":moyen_de_paiement", $this->moyen_de_paiement);
+        $sth->bindParam(":numero_de_commande", $this->numero_de_commande);
+        $sth->bindParam(":date_de_paiement", $this->date_de_paiement);
 
         if ($this->id > 0) {
             $sth->bindParam(":id", $this->id);
         }
         $sth->execute();
     }
-    public static function list(): array
+    public static function liste(): array
     {
         $dbh = new Database();
         $sql = "select * from command_paiement";
         $sth = $dbh->prepare($sql);
         $sth->execute();
-        $list = $sth->fetchAll(PDO::FETCH_CLASS, "PanierPage");
+        $list = $sth->fetchAll(PDO::FETCH_CLASS, "PanierModel");
         return $list;
     }
 }
