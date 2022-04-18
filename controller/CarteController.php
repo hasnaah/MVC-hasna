@@ -2,7 +2,7 @@
 
 class CarteController
 {
-    public function exec(): View
+    public function liste(): View
     {
         // je recupere mes pizza
         $listePizza = PizzaModel::list();

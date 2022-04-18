@@ -8,6 +8,11 @@ class PizzaModel extends Database
     private int $prixPetite = 0;
     private int $prixPart = 0;
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getNom(): string
     {
         return $this->nom;
@@ -85,5 +90,19 @@ class PizzaModel extends Database
         $sth->execute();
         $list = $sth->fetchAll(PDO::FETCH_CLASS, 'PizzaModel');
         return $list;
+    }
+
+
+    
+    public static function trouverParId(int $id): self
+    {
+        $dbh = new Database();
+        $sql = "select * from pizza where id = :id";
+        $sth = $dbh->prepare($sql);
+        $sth->bindParam(":id", $id);
+        $sth->execute();
+
+        $pizza = $sth->fetchObject('PizzaModel');
+        return $pizza;
     }
 }

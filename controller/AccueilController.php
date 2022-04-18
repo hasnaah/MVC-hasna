@@ -2,7 +2,7 @@
 
 class AccueilController
 {
-    public function exec(): View
+    public function index(): View
     {
 
         $accueilView = new View('accueil');
