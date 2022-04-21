@@ -35,6 +35,7 @@ class PanierModel
 
     public function supprimer(PanierItemModel $item): void
     {
+        
     }
 
 

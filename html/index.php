@@ -6,12 +6,14 @@ spl_autoload_register(function ($class_name) {
     if (endsWith($class_name, 'Controller')) {
         require_once '../controller/'.$class_name . '.php';
     }
-    else if (endsWith($class_name, 'Model')) {
-        require_once '../model/'.$class_name . '.php';
+    else if  (endsWith($class_name,'Model')){
+       require_once '../model/'.$class_name . '.php';
     }
     else {
         require_once '../core/'.$class_name . '.php';
+
     }
+    
 });
 
 
